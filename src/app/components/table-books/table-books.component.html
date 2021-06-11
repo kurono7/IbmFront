@@ -1,0 +1,59 @@
+<div class="container">
+  <form
+    [formGroup]="search"
+    class="text-center border border-light p-5"
+    (ngSubmit)="save($event)"
+  >
+    <div class="row">
+      <div class="col-6">
+        <input
+          type="text"
+          formControlName="book"
+          class="form-control mb-4"
+          placeholder="Search"
+        />
+      </div>
+      <div class="col-4">
+        <select
+          formControlName="category"
+          class="form-control mb-4"
+          placeholder="Choose your option"
+        >
+          <option
+            *ngFor="let el of categorys; let i = index"
+            [value]="el.value"  [selected]="el.value === 'all'"
+          >
+            {{ el.label }}
+          </option>
+        </select>
+      </div>
+      <div class="col-2">
+        <button
+          class="btn btn-primary"
+          type="submit"
+          [disabled]="search.invalid"
+        >
+          Search
+        </button>
+      </div>
+    </div>
+  </form>
+
+  <table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th *ngFor="let head of headElements" scope="col">{{ head }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr mdbTableCol *ngFor="let el of elements; let i = index">
+        <th scope="row">{{ i + 1 }}</th>
+        <td>{{ el.title }}</td>
+        <td>{{ el.subject }}</td>
+        <td>{{ el.publisher }}</td>
+        <td>{{ el.publishingDate }}</td>
+        <td>{{ el.publisherPhone }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
